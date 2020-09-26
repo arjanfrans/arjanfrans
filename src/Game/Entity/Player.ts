@@ -1,12 +1,16 @@
 import {Actor, CollisionType, Color, Engine, Input} from "excalibur";
 
+interface IPlayerOptions {
+    x: number;
+    y: number;
+}
+
 export class Player extends Actor {
     public readonly velocity: number = 0.1;
 
-    constructor(x: number = 150, y: number = 40) {
+    constructor(options: IPlayerOptions) {
         super({
-            x,
-            y,
+            ...options,
             width: 20,
             height: 20,
             collisionType: CollisionType.Fixed,

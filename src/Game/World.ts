@@ -1,15 +1,39 @@
-import {Engine} from "excalibur";
-import {Player} from "./Entity/Player";
+import {Engine, Loadable} from "excalibur";
+import {TiledResource} from "@excaliburjs/excalibur-tiled";
+import {MapData} from "./TiledMap/MapData";
 
 export class World {
-    private readonly player: Player;
+    private readonly level1: TiledResource;
 
     constructor(private engine: Engine) {
-        this.player = new Player();
+        this.level1 = new TiledResource("/assets/maps/level1.json");
     }
 
-    public init(): void
+    public init(): void {
+        const tileMap = this.level1.getTileMap();
+
+        this.loadObjectLayer();
+
+        this.engine.add(tileMap);
+    }
+
+    private loadObjectLayer(): void
     {
-        this.engine.add(this.player);
+        const data = this.level1.getData();
+
+        const mapData = new MapData(data);
+
+        const actors = mapData.getActors();
+
+        for (const actor of actors) {
+            this.engine.add(actor);
+        }
+    }
+
+    public getLoadableResources(): Array<Loadable>
+    {
+        return [
+            this.level1
+        ]
     }
 }
