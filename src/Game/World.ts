@@ -1,39 +1,47 @@
-import {Engine, Loadable} from "excalibur";
-import {TiledResource} from "@excaliburjs/excalibur-tiled";
-import {MapData} from "./TiledMap/MapData";
+import { Engine, Loadable, SpriteSheet, Texture } from "excalibur";
+import { TiledResource } from "@excaliburjs/excalibur-tiled";
+import { MapParser } from "./TiledMap/MapParser";
+import { PlayerView } from "./PlayerView";
 
 export class World {
     private readonly level1: TiledResource;
+    private readonly spriteSheets: Map<string, SpriteSheet> = new Map<
+        string,
+        SpriteSheet
+    >();
+    private readonly playerTexture: Texture;
 
     constructor(private engine: Engine) {
         this.level1 = new TiledResource("/assets/maps/level1.json");
+        this.playerTexture = new Texture("/assets/characters/player.png");
     }
 
     public init(): void {
         const tileMap = this.level1.getTileMap();
 
-        this.loadObjectLayer();
+        this.parseMap();
 
         this.engine.add(tileMap);
     }
 
-    private loadObjectLayer(): void
-    {
+    private parseMap(): void {
         const data = this.level1.getData();
 
-        const mapData = new MapData(data);
+        const mapParser = new MapParser(this.engine, data);
+        const player = mapParser.getPlayer();
 
-        const actors = mapData.getActors();
+        player.view = new PlayerView(this.engine, player, this.playerTexture);
 
-        for (const actor of actors) {
-            this.engine.add(actor);
-        }
+        this.engine.add(player);
     }
 
-    public getLoadableResources(): Array<Loadable>
-    {
-        return [
-            this.level1
-        ]
+    public getSpriteSheet(name: string): SpriteSheet | null {
+        const spriteSheet = this.spriteSheets.get(name);
+
+        return spriteSheet ? spriteSheet : null;
+    }
+
+    public getLoadableResources(): Array<Loadable> {
+        return [this.level1, this.playerTexture];
     }
 }

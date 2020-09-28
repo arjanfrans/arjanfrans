@@ -22,7 +22,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && gh-pages -d build"
+    "deploy": "npm run build && gh-pages -d build",
+    "cs-fix": "eslint src --ext ts,tsx",
+    "cs-format": "prettier  'src/**/*.ts' --write --tab-width 4"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -40,6 +42,7 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.1.0"
+    "gh-pages": "^3.1.0",
+    "prettier": "^2.1.2"
   }
 }
