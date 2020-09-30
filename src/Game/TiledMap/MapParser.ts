@@ -1,5 +1,5 @@
-import { Engine } from "excalibur";
-import { Player } from "../Entity/Player";
+import {Actor, CollisionType, Engine} from "excalibur";
+import {Player} from "../Entity/Player";
 
 interface IObject {
     gid: number;
@@ -25,6 +25,7 @@ export class MapParser {
     public static TILE_LAYER: string = "tilelayer";
     public readonly layers: Map<string, ILayer> = new Map<string, ILayer>();
     private objects: Map<string, IObject> = new Map<string, IObject>();
+    private collisions: Map<string, IObject> = new Map<string, IObject>();
 
     public static PLAYER_NAME = "player";
 
@@ -40,6 +41,23 @@ export class MapParser {
         const layer = this.layers.get(name);
 
         return layer ? layer : null;
+    }
+
+    public getCollisionActors(): Array<Actor>
+    {
+        const actors = [];
+
+        for(const collision of this.collisions.values()) {
+            actors.push(new Actor({
+                x: collision.x + (collision.width / 2),
+                y: collision.y + (collision.height / 2),
+                width: collision.width,
+                height: collision.height,
+                collisionType: CollisionType.Fixed
+            }));
+        }
+
+        return actors;
     }
 
     public getPlayer(): Player {
@@ -58,8 +76,14 @@ export class MapParser {
     private parseObjectLayers(): void {
         for (const layer of this.layers.values()) {
             if (layer.type === MapParser.OBJECT_LAYER && layer.objects) {
-                for (const object of layer.objects) {
-                    this.objects.set(object.name, object);
+                if (layer.name.startsWith('object')) {
+                    for (const object of layer.objects) {
+                        this.objects.set(object.name, object);
+                    }
+                } else if (layer.name.startsWith('collision')) {
+                    for (const object of layer.objects) {
+                        this.collisions.set(object.id.toString(), object);
+                    }
                 }
             }
         }

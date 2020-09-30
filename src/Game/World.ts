@@ -33,6 +33,10 @@ export class World {
         player.view = new PlayerView(this.engine, player, this.playerTexture);
 
         this.engine.add(player);
+
+        for (const collisionActor of mapParser.getCollisionActors()) {
+           this.engine.add(collisionActor);
+        }
     }
 
     public getSpriteSheet(name: string): SpriteSheet | null {
