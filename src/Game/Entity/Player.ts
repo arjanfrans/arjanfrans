@@ -1,10 +1,5 @@
-import { Actor, CollisionType, Engine, Input } from "excalibur";
+import {Actor, ActorArgs, CollisionType, Engine, Input} from "excalibur";
 import { PlayerView } from "../PlayerView";
-
-interface IPlayerOptions {
-    x: number;
-    y: number;
-}
 
 export class Player extends Actor {
     get direction(): string {
@@ -21,13 +16,11 @@ export class Player extends Actor {
 
     constructor(
         private engine: Engine,
-        options: IPlayerOptions,
+        config: ActorArgs,
         public view?: PlayerView
     ) {
         super({
-            ...options,
-            width: 20,
-            height: 20,
+            ...config,
             collisionType: CollisionType.Active,
         });
     }

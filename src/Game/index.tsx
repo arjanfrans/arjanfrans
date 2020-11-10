@@ -2,6 +2,7 @@ import * as ex from 'excalibur'
 import {Loader} from 'excalibur'
 import React from "react";
 import {World} from "./World";
+import {CONFIG} from "../config";
 
 export class Game extends React.Component<{}, {}>{
     public async componentDidMount(): Promise<void>
@@ -12,7 +13,7 @@ export class Game extends React.Component<{}, {}>{
             canvasElementId: 'game',
         });
 
-        const world = new World(engine);
+        const world = new World(engine, CONFIG);
         const loader = new Loader(world.getLoadableResources());
 
         await engine.start(loader);

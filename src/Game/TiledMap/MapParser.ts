@@ -1,5 +1,6 @@
-import {Actor, CollisionType, Engine} from "excalibur";
+import {Actor, CollisionType, Engine, ScreenElement} from "excalibur";
 import {Player} from "../Entity/Player";
+import {DialogTrigger} from "../Entity/DialogTrigger";
 
 interface IObject {
     gid: number;
@@ -60,6 +61,30 @@ export class MapParser {
         return actors;
     }
 
+    public getDialogTriggers(dialogViews: Map<string, ScreenElement>): Array<DialogTrigger> {
+        const dialogTriggers = [];
+        for (const object of this.objects.values()) {
+            if (object.type === 'DialogTrigger') {
+                const dialogView = dialogViews.get(object.name);
+
+                if (dialogView) {
+                    const dialogTrigger = new DialogTrigger(dialogView, {
+                        x: object.x + (object.width / 2),
+                        y: object.y + (object.height / 2),
+                        width: object.width,
+                        height: object.height
+                    });
+
+                    dialogTriggers.push(dialogTrigger);
+                } else {
+                    throw new Error(`No DialogView with name ${object.name} exists`);
+                }
+            }
+        }
+
+        return dialogTriggers;
+    }
+
     public getPlayer(): Player {
         const playerData = this.objects.get(MapParser.PLAYER_NAME);
 
@@ -70,6 +95,8 @@ export class MapParser {
         return new Player(this.engine, {
             x: playerData.x,
             y: playerData.y,
+            width: playerData.width,
+            height: playerData.height,
         });
     }
 
