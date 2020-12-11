@@ -18,7 +18,7 @@
 * Rewrite [Risk board game](https://github.com/arjanfrans/conquete) in Typescript.
 * Try to get [Running for Hope](https://github.com/arjanfrans/running-for-hope) running and make a gameplay video.
 * Update [strict-emitter](https://github.com/arjanfrans/strict-emitter)/[strict-errors](https://github.com/arjanfrans/strict-errors) description with better ways to solve the problems.
-* Rewrite [Mainloop fork](https://github.com/IceCreamYou/MainLoop.js).
+* Rewrite [Mainloop fork](https://github.com/arjanfrans/mainloop).
 
 
 
