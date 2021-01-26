@@ -5,7 +5,7 @@
 :drum: [Web Drum Machine](https://github.com/arjanfrans/web-drum-machine)
 
 
-#### Inactive projects
+#### Other projects
 * :mushroom: [Super Mario Bros. clone](https://github.com/arjanfrans/mario-game)
 * :world_map: [Risk board game](https://github.com/arjanfrans/conquete)
 * :gun: [Top down shooter game](https://github.com/arjanfrans/grand-theft-duty)
