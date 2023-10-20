@@ -2,16 +2,15 @@
 
 
 #### Active projects
-:drum: [Web Drum Machine](https://github.com/arjanfrans/web-drum-machine)
-
+⚾ [Baseball Scoreboard](https://github.com/hardbulls/baseball-scoreboard)  
 
 #### Other projects
+* :drum: [Web Drum Machine](https://github.com/arjanfrans/web-drum-machine)
 * :mushroom: [Super Mario Bros. clone](https://github.com/arjanfrans/mario-game)
 * :world_map: [Risk board game](https://github.com/arjanfrans/conquete)
 * :gun: [Top down shooter game](https://github.com/arjanfrans/grand-theft-duty)
 * :globe_with_meridians: [Websocket multiplayer](https://github.com/arjanfrans/realtime-multiplayer-in-html5)
 * :runner: [A "Serious Game"](https://github.com/arjanfrans/running-for-hope)
-
 
 #### ToDo-list
 * Rewrite [node-ztable](https://github.com/arjanfrans/node-ztable) in Typescript.
