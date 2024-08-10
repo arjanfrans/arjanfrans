@@ -2,6 +2,7 @@
 
 
 #### Active projects
+📐 [Web Component UI Library](https://github.com/arjanfrans/web-components-ui)  
 ⚾ [Baseball Scoreboard](https://github.com/hardbulls/baseball-scoreboard)  
 🚨 [Environment Warning Browser Extension](https://github.com/arjanfrans/environment-warning-chrome-extension) ([Chrome Web Store](https://chromewebstore.google.com/detail/environment-warning/coplemcefcojahbbpbbfbpmchlnclngk))
 
